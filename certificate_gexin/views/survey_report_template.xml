@@ -1,0 +1,10 @@
+<odoo>
+<template
+        id="certification_report_view_general_inherit"
+        inherit_id="survey.certification_report_view_modern"
+    >
+        <xpath expr="//div[hasclass('certification')]" position="attibutes">
+            <attibute name="class">certification certification_custom</attibute>
+            </xpath>
+            </template>
+</odoo>
