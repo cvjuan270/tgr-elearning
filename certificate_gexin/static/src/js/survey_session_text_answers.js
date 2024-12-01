@@ -36,30 +36,20 @@ odoo.define("survey.session_text_answers", function (require) {
             var self = this;
 
             inputLineValues.forEach(function (inputLineValue) {
-                if (
-                    !self.answerIds.includes(inputLineValue.id) &&
-                    inputLineValue.value
-                ) {
+                if (!self.answerIds.includes(inputLineValue.id) && inputLineValue.value) {
                     var textValue = inputLineValue.value;
                     if (self.questionType === "char_box") {
-                        textValue =
-                            textValue.length > 25
-                                ? textValue.substring(0, 22) + "..."
-                                : textValue;
+                        textValue = textValue.length > 25 ? textValue.substring(0, 22) + "..." : textValue;
                     } else if (self.questionType === "date") {
                         textValue = moment(textValue).format(time.getLangDateFormat());
                     } else if (self.questionType === "datetime") {
-                        textValue = moment(textValue).format(
-                            time.getLangDatetimeFormat()
-                        );
+                        textValue = moment(textValue).format(time.getLangDatetimeFormat());
                     }
 
                     var $textAnswer = $(
                         QWeb.render("survey.survey_session_text_answer", {
                             value: textValue,
-                            borderColor: `rgb(${
-                                SESSION_CHART_COLORS[self.answerIds.length % 10]
-                            })`,
+                            borderColor: `rgb(${SESSION_CHART_COLORS[self.answerIds.length % 10]})`,
                         })
                     );
                     self.$el.append($textAnswer);

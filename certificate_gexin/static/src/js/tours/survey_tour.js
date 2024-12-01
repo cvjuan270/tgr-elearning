@@ -8,9 +8,7 @@ tour.register(
     "survey_tour",
     {
         url: "/web",
-        rainbowManMessage: _t(
-            "Congratulations! You are now ready to collect feedback like a pro :-)"
-        ),
+        rainbowManMessage: _t("Congratulations! You are now ready to collect feedback like a pro :-)"),
         sequence: 225,
     },
     [

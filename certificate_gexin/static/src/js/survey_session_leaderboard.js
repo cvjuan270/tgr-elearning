@@ -47,24 +47,17 @@ odoo.define("survey.session_leaderboard", function (require) {
             }
 
             var leaderboardPromise = this._rpc({
-                route: _.str.sprintf(
-                    "/survey/session/leaderboard/%s",
-                    this.surveyAccessToken
-                ),
+                route: _.str.sprintf("/survey/session/leaderboard/%s", this.surveyAccessToken),
             });
 
             Promise.all([fadeOutPromise, leaderboardPromise]).then(function (results) {
                 var leaderboardResults = results[1];
                 var $renderedTemplate = $(leaderboardResults);
-                self.$(".o_survey_session_leaderboard_container").append(
-                    $renderedTemplate
-                );
+                self.$(".o_survey_session_leaderboard_container").append($renderedTemplate);
 
                 self.$(".o_survey_session_leaderboard_item").each(function (index) {
                     var rgb = SESSION_CHART_COLORS[index % 10];
-                    $(this)
-                        .find(".o_survey_session_leaderboard_bar")
-                        .css("background-color", `rgba(${rgb},1)`);
+                    $(this).find(".o_survey_session_leaderboard_bar").css("background-color", `rgba(${rgb},1)`);
                     $(this)
                         .find(".o_survey_session_leaderboard_bar_question")
                         .css("background-color", `rgba(${rgb},${0.4})`);
@@ -104,13 +97,7 @@ odoo.define("survey.session_leaderboard", function (require) {
          * @param {Boolean} plusSign wether or not we add a "+" before the score
          * @private
          */
-        _animateScoreCounter: function (
-            $scoreEl,
-            currentScore,
-            totalScore,
-            increment,
-            plusSign
-        ) {
+        _animateScoreCounter: function ($scoreEl, currentScore, totalScore, increment, plusSign) {
             var self = this;
             setTimeout(function () {
                 var nextScore = currentScore + increment;
@@ -120,13 +107,7 @@ odoo.define("survey.session_leaderboard", function (require) {
                 $scoreEl.text(`${plusSign ? "+ " : ""}${Math.round(nextScore)} p`);
 
                 if (nextScore < totalScore) {
-                    self._animateScoreCounter(
-                        $scoreEl,
-                        nextScore,
-                        totalScore,
-                        increment,
-                        plusSign
-                    );
+                    self._animateScoreCounter($scoreEl, nextScore, totalScore, increment, plusSign);
                 }
             }, 25);
         },
@@ -145,10 +126,7 @@ odoo.define("survey.session_leaderboard", function (require) {
             var animationPromise = new Promise(function (resolve) {
                 animationDone = resolve;
             });
-            $score.css(
-                "top",
-                `calc(calc(${this.BAR_HEIGHT} * ${position}) + ${offset}rem)`
-            );
+            $score.css("top", `calc(calc(${this.BAR_HEIGHT} * ${position}) + ${offset}rem)`);
             setTimeout(animationDone, timeout);
             return animationPromise;
         },
@@ -171,9 +149,7 @@ odoo.define("survey.session_leaderboard", function (require) {
             setTimeout(function () {
                 this.$(".o_survey_session_leaderboard_bar").each(function () {
                     var currentScore = parseInt(
-                        $(this)
-                            .closest(".o_survey_session_leaderboard_item")
-                            .data("currentScore")
+                        $(this).closest(".o_survey_session_leaderboard_item").data("currentScore")
                     );
                     if (currentScore && currentScore !== 0) {
                         $(this).css("transition", `width 1s cubic-bezier(.4,0,.4,1)`);
@@ -215,12 +191,7 @@ odoo.define("survey.session_leaderboard", function (require) {
                         var offset = newPosition > currentPosition ? 2 : -2;
                         await self._animateMoveTo($score, newPosition, offset, 300);
                         $score.css("transition", "top ease-in-out .1s");
-                        await self._animateMoveTo(
-                            $score,
-                            newPosition,
-                            offset * -0.3,
-                            100
-                        );
+                        await self._animateMoveTo($score, newPosition, offset * -0.3, 100);
                         await self._animateMoveTo($score, newPosition, 0, 0);
                         animationDone();
                     }
@@ -250,15 +221,13 @@ odoo.define("survey.session_leaderboard", function (require) {
             setTimeout(function () {
                 this.$(".o_survey_session_leaderboard_bar_question").each(function () {
                     var $barEl = $(this);
-                    var width = `calc(calc(100% - ${self.BAR_WIDTH}) * ${$barEl.data(
-                        "widthRatio"
-                    )} + ${self.BAR_MIN_WIDTH})`;
+                    var width = `calc(calc(100% - ${self.BAR_WIDTH}) * ${$barEl.data("widthRatio")} + ${
+                        self.BAR_MIN_WIDTH
+                    })`;
                     $barEl.css("transition", "width 1s ease-out");
                     $barEl.css("width", width);
 
-                    var $scoreEl = $barEl
-                        .find(".o_survey_session_leaderboard_bar_question_score")
-                        .text("0 p");
+                    var $scoreEl = $barEl.find(".o_survey_session_leaderboard_bar_question_score").text("0 p");
                     var questionScore = parseInt($barEl.data("questionScore"));
                     if (questionScore && questionScore > 0) {
                         var increment = parseInt($barEl.data("maxQuestionScore") / 40);
@@ -268,13 +237,7 @@ odoo.define("survey.session_leaderboard", function (require) {
                         $scoreEl.text("+ 0 p");
                         console.log($barEl.data("maxQuestionScore"));
                         setTimeout(function () {
-                            self._animateScoreCounter(
-                                $scoreEl,
-                                0,
-                                questionScore,
-                                increment,
-                                true
-                            );
+                            self._animateScoreCounter($scoreEl, 0, questionScore, increment, true);
                         }, 400);
                     }
                     setTimeout(animationDone, 1400);
@@ -337,23 +300,19 @@ odoo.define("survey.session_leaderboard", function (require) {
                     var maxUpdatedScore = parseInt($(this).data("maxUpdatedScore"));
                     var baseRatio = updatedScore / maxUpdatedScore;
                     var questionScore = parseInt($(this).data("questionScore"));
-                    var questionRatio =
-                        questionScore /
-                        (updatedScore && updatedScore !== 0 ? updatedScore : 1);
+                    var questionRatio = questionScore / (updatedScore && updatedScore !== 0 ? updatedScore : 1);
                     // we keep a min fixed with of 3rem to be able to display "+ 5 p"
                     // even if the user already has 1.000.000 points
-                    var questionWith = `calc(calc(calc(100% - ${self.BAR_WIDTH}) * ${
-                        questionRatio * baseRatio
-                    }) + ${self.BAR_MIN_WIDTH})`;
+                    var questionWith = `calc(calc(calc(100% - ${self.BAR_WIDTH}) * ${questionRatio * baseRatio}) + ${
+                        self.BAR_MIN_WIDTH
+                    })`;
                     $(this)
                         .find(".o_survey_session_leaderboard_bar_question")
                         .css("transition", `width ease .5s ${growthAnimation}`)
                         .css("width", questionWith);
 
                     var updatedScoreRatio = 1 - questionRatio;
-                    var updatedScoreWidth = `calc(calc(100% - ${self.BAR_WIDTH}) * ${
-                        updatedScoreRatio * baseRatio
-                    })`;
+                    var updatedScoreWidth = `calc(calc(100% - ${self.BAR_WIDTH}) * ${updatedScoreRatio * baseRatio})`;
                     $(this)
                         .find(".o_survey_session_leaderboard_bar")
                         .css("min-width", "0px")

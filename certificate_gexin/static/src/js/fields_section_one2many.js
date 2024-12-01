@@ -38,10 +38,7 @@ odoo.define("survey.question_page_one2many", function (require) {
             var isSection = record.data[this.sectionFieldName];
 
             if (isSection) {
-                if (
-                    node.attrs.widget === "handle" ||
-                    node.attrs.name === "random_questions_count"
-                ) {
+                if (node.attrs.widget === "handle" || node.attrs.name === "random_questions_count") {
                     return $cell;
                 } else if (node.attrs.name === "title") {
                     var nbrColumns = this._getNumberOfCols();
@@ -55,9 +52,7 @@ odoo.define("survey.question_page_one2many", function (require) {
                         nbrColumns--;
                     }
                     // Render empty cells for buttons to avoid having unaligned elements
-                    nbrColumns -= this.columns.filter(
-                        (elem) => elem.tag === "button_group"
-                    ).length;
+                    nbrColumns -= this.columns.filter((elem) => elem.tag === "button_group").length;
                     $cell.attr("colspan", nbrColumns);
                 } else if (node.tag === "button_group") {
                     $cell.addClass("o_invisible_modifier");

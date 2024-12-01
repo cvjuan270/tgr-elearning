@@ -70,9 +70,7 @@ export class QuestionPageListRenderer extends ListRenderer {
             colspan += 1;
         }
 
-        const sectionColumns = columns
-            .slice(0, titleColumnIndex + 1)
-            .concat(columns.slice(titleColumnIndex + colspan));
+        const sectionColumns = columns.slice(0, titleColumnIndex + 1).concat(columns.slice(titleColumnIndex + colspan));
 
         sectionColumns[titleColumnIndex] = {
             ...sectionColumns[titleColumnIndex],
@@ -100,9 +98,7 @@ export class QuestionPageListRenderer extends ListRenderer {
      * @override
      */
     focusCell(column, forward = true) {
-        const actualColumn = column.name
-            ? this.state.columns.find((col) => col.name === column.name)
-            : column;
+        const actualColumn = column.name ? this.state.columns.find((col) => col.name === column.name) : column;
         super.focusCell(actualColumn, forward);
     }
 

@@ -25,9 +25,7 @@ odoo.define("survey.breadcrumb", function (require) {
         _onBreadcrumbClick: function (event) {
             event.preventDefault();
             this.trigger_up("breadcrumb_click", {
-                previousPageId: this.$(event.currentTarget)
-                    .closest(".breadcrumb-item")
-                    .data("pageId"),
+                previousPageId: this.$(event.currentTarget).closest(".breadcrumb-item").data("pageId"),
             });
         },
 

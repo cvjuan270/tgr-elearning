@@ -11,9 +11,7 @@ odoo.define("survey.session_chart", function (require) {
             this.questionType = options.questionType;
             this.answersValidity = options.answersValidity;
             this.hasCorrectAnswers = options.hasCorrectAnswers;
-            this.questionStatistics = this._processQuestionStatistics(
-                options.questionStatistics
-            );
+            this.questionStatistics = this._processQuestionStatistics(options.questionStatistics);
             this.showInputs = options.showInputs;
             this.showAnswers = false;
         },
@@ -40,8 +38,7 @@ odoo.define("survey.session_chart", function (require) {
          */
         updateChart: function (questionStatistics, newAttendeesCount) {
             if (questionStatistics) {
-                this.questionStatistics =
-                    this._processQuestionStatistics(questionStatistics);
+                this.questionStatistics = this._processQuestionStatistics(questionStatistics);
             }
 
             if (this.chart) {
@@ -222,42 +219,27 @@ odoo.define("survey.session_chart", function (require) {
 
                             let charPerLine;
                             let fontRatio;
-                            charPerLineBreakpoints.forEach(
-                                ([lowerBound, upperBound, value, ratio]) => {
-                                    if (
-                                        nbrCol >= lowerBound &&
-                                        (upperBound === null || nbrCol <= upperBound)
-                                    ) {
-                                        charPerLine = value;
-                                        fontRatio = ratio;
-                                    }
+                            charPerLineBreakpoints.forEach(([lowerBound, upperBound, value, ratio]) => {
+                                if (nbrCol >= lowerBound && (upperBound === null || nbrCol <= upperBound)) {
+                                    charPerLine = value;
+                                    fontRatio = ratio;
                                 }
-                            );
+                            });
 
                             // Adapt font size if the number of characters per line is under the maximum
                             if (charPerLine < 25) {
-                                const allWords = chart.data.labels.reduce(
-                                    (accumulator, words) =>
-                                        accumulator.concat(" ".concat(words))
+                                const allWords = chart.data.labels.reduce((accumulator, words) =>
+                                    accumulator.concat(" ".concat(words))
                                 );
-                                const maxWordLength = Math.max(
-                                    ...allWords.split(" ").map((word) => word.length)
-                                );
-                                fontRatio =
-                                    maxWordLength > charPerLine ? minRatio : fontRatio;
+                                const maxWordLength = Math.max(...allWords.split(" ").map((word) => word.length));
+                                fontRatio = maxWordLength > charPerLine ? minRatio : fontRatio;
                                 chart.options.scales.xAxes[0].ticks.fontSize = Math.min(
-                                    parseInt(
-                                        chart.options.scales.xAxes[0].ticks.fontSize
-                                    ),
+                                    parseInt(chart.options.scales.xAxes[0].ticks.fontSize),
                                     (chart.width * fontRatio) / nbrCol
                                 );
                             }
 
-                            chart.data.labels.forEach(function (
-                                label,
-                                index,
-                                labelsList
-                            ) {
+                            chart.data.labels.forEach(function (label, index, labelsList) {
                                 // Split all the words of the label
                                 const words = label.split(" ");
                                 let resultLines = [];
@@ -266,20 +248,15 @@ odoo.define("survey.session_chart", function (require) {
                                     // Chop down words that do not fit on a single line, add each part on its own line.
                                     let word = words[i];
                                     while (word.length > charPerLine) {
-                                        resultLines.push(
-                                            word.slice(0, charPerLine - 1) + "-"
-                                        );
+                                        resultLines.push(word.slice(0, charPerLine - 1) + "-");
                                         word = word.slice(charPerLine - 1);
                                     }
                                     currentLine.push(word);
 
                                     // Continue to add words in the line if there is enough space and if there is at least one more word to add
-                                    const nextWord =
-                                        i + 1 < words.length ? words[i + 1] : null;
+                                    const nextWord = i + 1 < words.length ? words[i + 1] : null;
                                     if (nextWord) {
-                                        const nextLength =
-                                            currentLine.join(" ").length +
-                                            nextWord.length;
+                                        const nextLength = currentLine.join(" ").length + nextWord.length;
                                         if (nextLength <= charPerLine) {
                                             continue;
                                         }

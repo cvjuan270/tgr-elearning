@@ -18,9 +18,7 @@ odoo.define("survey.timer", function (require) {
             this.surveyTimerInterval = null;
             this.timeDifference = null;
             if (params.serverTime) {
-                this.timeDifference = moment
-                    .utc()
-                    .diff(moment.utc(params.serverTime), "milliseconds");
+                this.timeDifference = moment.utc().diff(moment.utc(params.serverTime), "milliseconds");
             }
         },
 
@@ -35,26 +33,15 @@ odoo.define("survey.timer", function (require) {
         start: function () {
             var self = this;
             return this._super.apply(this, arguments).then(function () {
-                self.countDownDate = moment
-                    .utc(self.timer)
-                    .add(self.timeLimitMinutes, "minutes");
+                self.countDownDate = moment.utc(self.timer).add(self.timeLimitMinutes, "minutes");
                 if (Math.abs(self.timeDifference) >= 5000) {
-                    self.countDownDate = self.countDownDate.add(
-                        self.timeDifference,
-                        "milliseconds"
-                    );
+                    self.countDownDate = self.countDownDate.add(self.timeDifference, "milliseconds");
                 }
-                if (
-                    self.timeLimitMinutes <= 0 ||
-                    self.countDownDate.diff(moment.utc(), "seconds") < 0
-                ) {
+                if (self.timeLimitMinutes <= 0 || self.countDownDate.diff(moment.utc(), "seconds") < 0) {
                     self.trigger_up("time_up");
                 } else {
                     self._updateTimer();
-                    self.surveyTimerInterval = setInterval(
-                        self._updateTimer.bind(self),
-                        1000
-                    );
+                    self.surveyTimerInterval = setInterval(self._updateTimer.bind(self), 1000);
                 }
             });
         },
@@ -76,18 +63,12 @@ odoo.define("survey.timer", function (require) {
          * for our use case.
          */
         _updateTimer: function () {
-            var timeLeft = Math.round(
-                this.countDownDate.diff(moment.utc(), "milliseconds") / 1000
-            );
+            var timeLeft = Math.round(this.countDownDate.diff(moment.utc(), "milliseconds") / 1000);
 
             if (timeLeft >= 0) {
                 var timeLeftMinutes = parseInt(timeLeft / 60);
                 var timeLeftSeconds = timeLeft - timeLeftMinutes * 60;
-                this.$el.text(
-                    this._formatTime(timeLeftMinutes) +
-                        ":" +
-                        this._formatTime(timeLeftSeconds)
-                );
+                this.$el.text(this._formatTime(timeLeftMinutes) + ":" + this._formatTime(timeLeftSeconds));
             } else {
                 clearInterval(this.surveyTimerInterval);
                 this.trigger_up("time_up");

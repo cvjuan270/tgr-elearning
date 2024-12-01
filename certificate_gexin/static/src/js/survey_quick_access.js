@@ -45,9 +45,7 @@ odoo.define("survey.quick.access", function (require) {
         },
 
         _onSessionCodeInput: function () {
-            this.el
-                .querySelectorAll(".o_survey_error > span")
-                .forEach((elem) => elem.classList.add("d-none"));
+            this.el.querySelectorAll(".o_survey_error > span").forEach((elem) => elem.classList.add("d-none"));
             this.$(".o_survey_launch_session").addClass("d-none");
             this.$('button[type="submit"]').removeClass("d-none");
         },
@@ -79,25 +77,15 @@ odoo.define("survey.quick.access", function (require) {
                 if (response.survey_url) {
                     window.location = response.survey_url;
                 } else {
-                    if (
-                        response.error &&
-                        response.error === "survey_session_not_launched"
-                    ) {
-                        self.$(".o_survey_session_error_not_launched").removeClass(
-                            "d-none"
-                        );
+                    if (response.error && response.error === "survey_session_not_launched") {
+                        self.$(".o_survey_session_error_not_launched").removeClass("d-none");
                         if ("survey_id" in response) {
                             self.$('button[type="submit"]').addClass("d-none");
                             self.$(".o_survey_launch_session").removeClass("d-none");
-                            self.$(".o_survey_launch_session").data(
-                                "surveyId",
-                                response.survey_id
-                            );
+                            self.$(".o_survey_launch_session").data("surveyId", response.survey_id);
                         }
                     } else {
-                        self.$(".o_survey_session_error_invalid_code").removeClass(
-                            "d-none"
-                        );
+                        self.$(".o_survey_session_error_invalid_code").removeClass("d-none");
                     }
                 }
             });

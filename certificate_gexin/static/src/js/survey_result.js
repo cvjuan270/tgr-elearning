@@ -79,13 +79,9 @@ odoo.define("survey.result", function (require) {
             var num = $target.text();
             var min = this.limit * (num - 1) - 1;
             if (min === -1) {
-                this.$questionsEl
-                    .find("tbody tr:lt(" + this.limit * num + ")")
-                    .removeClass("d-none");
+                this.$questionsEl.find("tbody tr:lt(" + this.limit * num + ")").removeClass("d-none");
             } else {
-                this.$questionsEl
-                    .find("tbody tr:lt(" + this.limit * num + "):gt(" + min + ")")
-                    .removeClass("d-none");
+                this.$questionsEl.find("tbody tr:lt(" + this.limit * num + "):gt(" + min + ")").removeClass("d-none");
             }
         },
     });
@@ -339,9 +335,7 @@ odoo.define("survey.result", function (require) {
                 var data = [];
                 for (var section in sectionGraphData) {
                     data.push(
-                        (sectionGraphData[section][resultKey] /
-                            sectionGraphData[section]["question_count"]) *
-                            100
+                        (sectionGraphData[section][resultKey] / sectionGraphData[section]["question_count"]) * 100
                     );
                 }
                 datasets.push({
@@ -396,10 +390,8 @@ odoo.define("survey.result", function (require) {
                     tooltips: {
                         callbacks: {
                             label: function (tooltipItem, data) {
-                                var datasetLabel =
-                                    data.datasets[tooltipItem.datasetIndex].label || "";
-                                var roundedValue =
-                                    Math.round(tooltipItem.yLabel * 100) / 100;
+                                var datasetLabel = data.datasets[tooltipItem.datasetIndex].label || "";
+                                var roundedValue = Math.round(tooltipItem.yLabel * 100) / 100;
                                 return `${datasetLabel}: ${roundedValue}%`;
                             },
                         },
@@ -443,9 +435,7 @@ odoo.define("survey.result", function (require) {
          * @param  {String} value.text The original text of the answer
          */
         _markIfCorrect: function (value) {
-            return `${value.text}${
-                this.rightAnswers.indexOf(value.text) >= 0 ? " \u2713" : ""
-            }`;
+            return `${value.text}${this.rightAnswers.indexOf(value.text) >= 0 ? " \u2713" : ""}`;
         },
     });
 
@@ -471,11 +461,7 @@ odoo.define("survey.result", function (require) {
          */
         willStart: function () {
             var url =
-                "/web/webclient/locale/" +
-                (document.documentElement.getAttribute("lang") || "en_US").replace(
-                    "-",
-                    "_"
-                );
+                "/web/webclient/locale/" + (document.documentElement.getAttribute("lang") || "en_US").replace("-", "_");
             var localeReady = loadJS(url);
             return Promise.all([this._super.apply(this, arguments), localeReady]);
         },
@@ -498,11 +484,7 @@ odoo.define("survey.result", function (require) {
                 });
 
                 self.$(".survey_graph").each(function () {
-                    allPromises.push(
-                        new publicWidget.registry.SurveyResultChart(self).attachTo(
-                            $(this)
-                        )
-                    );
+                    allPromises.push(new publicWidget.registry.SurveyResultChart(self).attachTo($(this)));
                 });
 
                 if (allPromises.length !== 0) {
@@ -524,10 +506,7 @@ odoo.define("survey.result", function (require) {
          */
         _onFilterAddAnswerClick: function (ev) {
             let params = new URLSearchParams(window.location.search);
-            params.set(
-                "filters",
-                this._prepareAnswersFilters(params.get("filters"), "add", ev)
-            );
+            params.set("filters", this._prepareAnswersFilters(params.get("filters"), "add", ev));
             window.location.href = window.location.pathname + "?" + params.toString();
         },
 
@@ -538,11 +517,7 @@ odoo.define("survey.result", function (require) {
          */
         _onFilterRemoveAnswerClick: function (ev) {
             let params = new URLSearchParams(window.location.search);
-            let filters = this._prepareAnswersFilters(
-                params.get("filters"),
-                "remove",
-                ev
-            );
+            let filters = this._prepareAnswersFilters(params.get("filters"), "remove", ev);
             if (filters) {
                 params.set("filters", filters);
             } else {
@@ -639,9 +614,7 @@ odoo.define("survey.result", function (require) {
                     .filter((filterItem) => filterItem !== eventFilter)
                     .join("|");
             } else {
-                throw new Error(
-                    '`operation` parameter for `_prepareAnswersFilters` must be either "add" or "remove".'
-                );
+                throw new Error('`operation` parameter for `_prepareAnswersFilters` must be either "add" or "remove".');
             }
             return filters;
         },

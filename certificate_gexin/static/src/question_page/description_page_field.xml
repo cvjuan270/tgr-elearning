@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <templates xml:space="preserve">
-
     <t t-name="survey.DescriptionPageField" t-inherit="web.CharField" owl="1">
         <xpath expr="//t[@t-else='']" position="replace">
             <t t-else="">
@@ -18,5 +17,4 @@
             </t>
         </xpath>
     </t>
-
 </templates>

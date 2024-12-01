@@ -101,18 +101,14 @@ export const SurveyImageZoomer = publicWidget.Widget.extend({
         }
         if (
             zoomStepNumber > 0 &&
-            (imageWidth * newZoomImageScale > bodyWidth ||
-                imageHeight * newZoomImageScale > bodyHeight)
+            (imageWidth * newZoomImageScale > bodyWidth || imageHeight * newZoomImageScale > bodyHeight)
         ) {
             // Prevent to user to further zoom in as the new image would becomes too large or too high for the screen.
             // Dezooming is still allowed to bring back image into frame (use case: resizing screen).
             return;
         }
         // !important is needed to prevent default 'no-transform' on smaller screens.
-        image.setAttribute(
-            "style",
-            "transform: scale(" + newZoomImageScale + ") !important"
-        );
+        image.setAttribute("style", "transform: scale(" + newZoomImageScale + ") !important");
         this.zoomImageScale = newZoomImageScale;
     },
 });
