@@ -5,6 +5,6 @@ printWidth: 120
 proseWrap: always
 semi: true
 trailingComma: "es5"
-xmlWhitespaceSensitivity: "ignore"
-tabWidth: 4
+#xmlWhitespaceSensitivity: "ignore"
+tabWidth: 2
 useTabs: false

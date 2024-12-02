@@ -1,127 +1,78 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <odoo>
-    <!-- oca-hooks:disable=xml-dangerous-qweb-replace-low-priority  -->
-    <template id="certification_report_view_general_inherit" inherit_id="survey.certification_report_view_modern">
-        <xpath expr="//div[@id='o_survey_certification']" position="replace">
-            <div
-                id="o_survey_certification"
-                t-att-data-oe-model="user_input._name"
-                t-att-data-oe-id="user_input.id"
-                t-att-class="'article certification-wrapper modern %s' % layout_color"
-            >
-                <div
-                    class="row"
-                    style="width:295mm;height:208mm;margin:1mm;background-image: url('/certificate_gexin/static/src/img/gexin_background.jpeg');background-size: cover; background-position: center;background-repeat: no-repeat;"
-                >
-                    <div class="col-4" />
-                    <div class="col-8" style="margin: 210px 50px 0px; text-align: center; ">
-                        <!-- Titulo -->
-                        <div>
-                            <h1 style="margin: 0px; font-size: 35px; font-weight:bold; color: #3094BA;">CERTIFICADO</h1>
-                            <h1 style="margin: 0px; font-size: 23px; color: grey;">DE CAPACITACIÓN</h1>
-                        </div>
-
-                        <!-- Usuario -->
-                        <div style="margin: 0px 0px 15px; display: flex; flex-direction: column; align-items: center;">
-                            <p style="font-size: 16px; color: grey; margin: 5px; ">Otorgado a:</p>
-                            <p
-                                style="margin: 10px 10px 5px; font-size: 25px; color: #1496CD; font-weight: bold; font-style:italic; text-transform: capitalize;"
-                            >
-                                <t t-set="certif_style" t-value="''" />
-                                <t
-                                    t-set="certified_name"
-                                    t-value="user_input.partner_id.name or user_input.email or ''"
-                                />
-                                <t t-if="certified_name.isupper()">
-                                    <t
-                                        t-set="certif_style"
-                                        t-value="certif_style + 'font-family: certification-serif;'"
-                                    />
-                                </t>
-                                <t t-if="len(certified_name) > 20">
-                                    <t
-                                        t-set="certif_style"
-                                        t-value="certif_style + 'font-size: 40px; line-height: 4;'"
-                                    />
-                                </t>
-                                <span t-att-style="certif_style" class="user-name" t-esc="certified_name" />
-                            </p>
-                            <div style="background-color: #1496CD; width: 50%; height: 2px;margin: 20px auto;" />
-                        </div>
-
-                        <!-- Tema -->
-                        <div>
-                            <br />
-                            <span style="color:grey;font-weight: bold; font-size: 16px ">
-                                Por
-                                <t t-esc="user_input.env.company.display_name" />
-                            </span>
-                            <p style="font-size: 16px; color: grey; margin: 10px; ">
-                                Por haber completado con éxito
-                                <br />
-                            </p>
-                        </div>
-                        <div style="border-radius: 10px; border: 1px #1496CD solid; width:80%;margin:20px auto">
-                            <p
-                                style="color: #1496CD; text-transform: uppercase; font-style: italic; font-weight: bold; font-size: 14px; padding: 0px 4px; "
-                            >
-                                <br />
-                                <b>
-                                    <span class="certification-name" t-field="user_input.survey_id.display_name" />
-                                </b>
-                            </p>
-                        </div>
-                        <div>
-                            <!-- <div style="display: flex; align-items: center; justify-content: center;"> -->
-                            <!--     <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"> -->
-                            <!--         <path -->
-                            <!--             fill="none" -->
-                            <!--             stroke="#8C8C8C" -->
-                            <!--             stroke-linecap="round" -->
-                            <!--             stroke-linejoin="round" -->
-                            <!--             stroke-width="2" -->
-                            <!--             d="M3 12a9 9 0 1 0 18 0a9 9 0 1 0-18 0m9 0H8.5M12 7v5" -->
-                            <!--         /> -->
-                            <!--     </svg> -->
-                            <!-- </div> -->
-                            <!-- <p style="font-size: 14px; color: grey; margin: 2px;">Realizado en Surco - Lima, Perú</p> -->
-                            <!-- <p style="font-size: 14px; color: grey; margin: 2px;">25 de SEPTIEMBRE del 2024</p> -->
-                            <span style="color:grey">Fecha:</span>
-                            <div
-                                style="font-size: 14px; color: grey; margin: 2px;"
-                                t-field="user_input.create_date"
-                                t-options='{"widget": "date"}'
-                            />
-                            <br />
-                            <div class="certification-number" t-if="user_input.scoring_success">
-                                Certificación n°
-                                <t t-esc="str(user_input.id).rjust(10, '0')" />
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- <div -->
-                <!--     style="display:flex;width:295mm;height:208mm;margin:1mm;justify-content:center;background-image: url('/certificate_gexin/static/src/img/gexin_background.jpeg');background-size: cover; background-position: center;background-repeat: no-repeat;" -->
-                <!-- > -->
-                <!--     <div class="left" style="width: 341px; height: 100%;" /> -->
-                <!--     <div class="rigth" style="margin: 110px 50px 0px; text-align: center; "> -->
-                <!--         <div class="image__container" style=" width: 100%; display: flex; justify-content: center; "> -->
-                <!--             <div -->
-                <!--                 class="image" -->
-                <!--                 style=" width:44px; height: 8px; background-color: #1496CD; border-radius: 10px; margin-bottom: 17px;" -->
-                <!--             /> -->
-                <!--             <div class="title" style="margin-bottom: 15px;"> -->
-                <!--                 <h1 -->
-                <!--                     style="margin:0px; font-size:35px; background: linear-gradient(to bottom, #3094BA,#1996CD);-webkit-background-clip: text; -webkit-text-fill-color: transparent;" -->
-                <!--                 > -->
-                <!--                     CERTIFICADO -->
-                <!--                 </h1> -->
-                <!--                 <h1 style="margin: 0px; font-size: 23px; color: grey;">DE CAPACITACIÓN</h1> -->
-                <!--             </div> -->
-                <!--         </div> -->
-                <!--     </div> -->
-                <!-- </div> -->
+  <!-- oca-hooks:disable=xml-dangerous-qweb-replace-low-priority  -->
+  <template id="certification_report_view_general_inherit" inherit_id="survey.certification_report_view_modern">
+    <xpath expr="//div[@id='o_survey_certification']" position="replace">
+      <div
+        id="o_survey_certification"
+        t-att-class="'article certification-wrapper modern %s' % layout_color"
+        t-att-data-oe-id="user_input.id"
+        t-att-data-oe-model="user_input._name"
+      >
+        <div
+          class="row"
+          style="width:295mm;height:208mm;margin:1mm;background-image: url('/certificate_gexin/static/src/img/gexin_background.jpeg');background-size: cover; background-position: center;background-repeat: no-repeat;"
+        >
+          <div class="col-4" />
+          <div class="col-8" style="margin: 210px 50px 0px; text-align: center; ">
+            <!-- Titulo -->
+            <div>
+              <h1 class="g-title g-title-margin">CERTIFICADO</h1>
+              <h1 class="g-sub-title g-title-margin">DE CAPACITACIÓN</h1>
             </div>
-        </xpath>
-    </template>
+            <!-- Usuario -->
+            <div class="g-user">
+              <p class="g-user-label g-p-margin">Otorgado a:</p>
+              <t t-set="certified_name" t-value="user_input.partner_id.name or user_input.email or ''" />
+              <t t-if="len(certified_name) > 20">
+                <p class="g-user-value-a g-p-margin">
+                  <t t-esc="certified_name" />
+                </p>
+              </t>
+              <t t-else="">
+                <p class="g-user-value-b g-p-margin">
+                  <t t-esc="certified_name" />
+                </p>
+              </t>
+              <div class="g-separator" />
+            </div>
+            <!-- Tema -->
+            <div class="g-tema">
+              <span>Por <t t-esc="user_input.env.company.display_name" /></span>
+              <p>Por haber completado con éxito el curso</p>
+            </div>
+            <div class="g-course-container">
+              <p t-field="user_input.survey_id.display_name" />
+            </div>
+            <div class="g-date">
+              <span>Fecha:</span>
+              <span t-esc="user_input.create_date.strftime('%d de %B del %Y')" />
+              <!-- <div class="certification-number" t-if="user_input.scoring_success">Certificación n° <t t-esc="str(user_input.id).rjust(10, '0')"></t></div> -->
+            </div>
+          </div>
+        </div>
+        <!-- <div -->
+        <!--     style="display:flex;width:295mm;height:208mm;margin:1mm;justify-content:center;background-image: url('/certificate_gexin/static/src/img/gexin_background.jpeg');background-size: cover; background-position: center;background-repeat: no-repeat;" -->
+        <!-- > -->
+        <!--     <div class="left" style="width: 341px; height: 100%;" /> -->
+        <!--     <div class="rigth" style="margin: 110px 50px 0px; text-align: center; "> -->
+        <!--         <div class="image__container" style=" width: 100%; display: flex; justify-content: center; "> -->
+        <!--             <div -->
+        <!--                 class="image" -->
+        <!--                 style=" width:44px; height: 8px; background-color: #1496CD; border-radius: 10px; margin-bottom: 17px;" -->
+        <!--             /> -->
+        <!--             <div class="title" style="margin-bottom: 15px;"> -->
+        <!--                 <h1 -->
+        <!--                     style="margin:0px; font-size:35px; background: linear-gradient(to bottom, #3094BA,#1996CD);-webkit-background-clip: text; -webkit-text-fill-color: transparent;" -->
+        <!--                 > -->
+        <!--                     CERTIFICADO -->
+        <!--                 </h1> -->
+        <!--                 <h1 style="margin: 0px; font-size: 23px; color: grey;">DE CAPACITACIÓN</h1> -->
+        <!--             </div> -->
+        <!--         </div> -->
+        <!--     </div> -->
+        <!-- </div> -->
+      </div>
+    </xpath>
+  </template>
 </odoo>

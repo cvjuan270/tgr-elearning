@@ -15,7 +15,7 @@
     "data": ["views/survey_report_template.xml"],
     "assets": {
         "web.report_assets_common": [
-            "certificate_gexin/static/src/scss/survey_reports.scss"
+            "certificate_gexin/static/src/scss/certificate_gexin.scss"
         ],
     },
 }

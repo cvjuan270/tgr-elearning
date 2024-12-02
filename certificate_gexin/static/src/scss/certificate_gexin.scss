@@ -1,0 +1,102 @@
+@font-face  {
+  font-family: "g-certification-serif";
+  src: url("/survey/static/src/font/Montserrat-Regular.ttf") format("truetype");
+  font-weight: normal;
+}
+
+@font-face {
+  font-family: "g-certification-serif";
+  src: url("/survey/static/src/fonts/Montserrat-Bold.ttf") format("truetype");
+  font-weight: bold;
+}
+
+.g-title {
+   font-family: "g-certification-serif", bold;
+    font-size: 36px;
+    font-weight: bold;
+    color:#3094BA;
+}
+.g-sub-title {
+   font-family: "g-certification-serif", bold;
+    font-size: 24px;
+    font-weight: bold;
+    color:grey;
+}
+.g-title-margin {
+    margin: 0.6rem 0rem;
+}
+.g-p-margin {
+    margin: 0.2rem 0rem;
+}
+.g-user{
+   font-family: "g-certification-serif", normal;
+    font-weight: normal;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+}
+.g-user-label{
+     font-size: 16px;
+    color: grey;
+    margin: 0;
+    padding: 0;
+}
+.g-user-value-a{
+    font-size:24px;
+    color: #1496CD;
+    font-weight: bold;
+    font-style:italic;
+    margin: 0;
+    padding: 0;
+    text-transform: capitalize;
+}
+.g-user-value-b{
+    font-size: 36px;
+    color: #1496CD;
+    font-weight: bold;
+    font-style:italic;
+    text-transform: capitalize;
+    margin: 0;
+    padding: 0;
+}
+.g-tema{
+    font-family: "g-certification-serif", normal;
+    font-size: 16px;
+    color: grey;
+    margin:0.8rem auto;
+    span {
+    font-weight: bold;
+        }
+}
+.g-certification{
+    border-radius: 10px;
+    border:1px #1496cd solid ;
+    width: 80%;
+    font-family: "g-certification-serif", bold;
+    font-size: 16px;
+    color: grey;
+}
+.g-separator{
+    background-color: #1496CD; width: 70%; height: 2px;margin: 0px auto;
+}
+.g-course-container{
+    font-family: "g-certification-serif", bold;
+    border-radius: 10px;
+    border: 1px #1496CD solid;
+    width:70%;
+    margin:0.6rem auto;
+    p{
+    color: #1496CD;
+        text-transform: uppercase;
+        font-style: italic;
+        font-weight: bold;
+        font-size: 16px;
+        margin:0.6rem auto;
+    }
+}
+.g-date{
+    font-family: "g-certification-serif", normal;
+    font-size: 16px;
+    color: grey;
+    margin: 0.6rem auto;
+}
