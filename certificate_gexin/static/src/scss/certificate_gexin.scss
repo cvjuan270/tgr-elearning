@@ -1,4 +1,7 @@
-@font-face  {
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap");
+$font-montserrat: "Montserrat", sans-serif;
+
+@font-face {
   font-family: "g-certification-serif";
   src: url("/survey/static/src/font/Montserrat-Regular.ttf") format("truetype");
   font-weight: normal;
@@ -11,92 +14,96 @@
 }
 
 .g-title {
-   font-family: "g-certification-serif", bold;
-    font-size: 36px;
-    font-weight: bold;
-    color:#3094BA;
+  font-family: "g-certification-serif", bold;
+  // font-family: $font-montserrat;
+  font-weight: bold;
+  font-size: 36px;
+  color: #3094ba;
 }
 .g-sub-title {
-   font-family: "g-certification-serif", bold;
-    font-size: 24px;
-    font-weight: bold;
-    color:grey;
+  font-family: "g-certification-serif", bold;
+  font-size: 24px;
+  font-weight: normal;
+  color: grey;
 }
 .g-title-margin {
-    margin: 0.6rem 0rem;
+  margin: 0.6rem 0rem;
 }
 .g-p-margin {
-    margin: 0.2rem 0rem;
+  margin: 0.2rem 0rem;
 }
-.g-user{
-   font-family: "g-certification-serif", normal;
-    font-weight: normal;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
+.g-user {
+  font-family: "g-certification-serif", normal;
+  font-weight: normal;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
-.g-user-label{
-     font-size: 16px;
-    color: grey;
-    margin: 0;
-    padding: 0;
+.g-user-label {
+  font-size: 16px;
+  color: grey;
+  margin: 0;
+  padding: 0;
 }
-.g-user-value-a{
-    font-size:24px;
-    color: #1496CD;
+.g-user-value-a {
+  font-size: 24px;
+  color: #1496cd;
+  font-weight: bold;
+  font-style: italic;
+  margin: 0;
+  padding: 0;
+  text-transform: capitalize;
+}
+.g-user-value-b {
+  font-size: 36px;
+  color: #1496cd;
+  font-weight: bold;
+  font-style: italic;
+  text-transform: capitalize;
+  margin: 0;
+  padding: 0;
+}
+.g-tema {
+  font-family: "g-certification-serif", normal;
+  font-size: 16px;
+  color: grey;
+  margin: 0.8rem auto;
+  span {
     font-weight: bold;
-    font-style:italic;
-    margin: 0;
-    padding: 0;
-    text-transform: capitalize;
+  }
 }
-.g-user-value-b{
-    font-size: 36px;
-    color: #1496CD;
+.g-certification {
+  border-radius: 10px;
+  border: 1px #1496cd solid;
+  width: 80%;
+  font-family: "g-certification-serif", bold;
+  font-size: 16px;
+  color: grey;
+}
+.g-separator {
+  background-color: #1496cd;
+  width: 70%;
+  height: 2px;
+  margin: 0px auto;
+}
+.g-course-container {
+  font-family: "g-certification-serif", bold;
+  border-radius: 10px;
+  border: 1px #1496cd solid;
+  width: 70%;
+  margin: 0.6rem auto;
+  p {
+    color: #1496cd;
+    text-transform: uppercase;
+    font-style: italic;
     font-weight: bold;
-    font-style:italic;
-    text-transform: capitalize;
-    margin: 0;
-    padding: 0;
-}
-.g-tema{
-    font-family: "g-certification-serif", normal;
     font-size: 16px;
-    color: grey;
-    margin:0.8rem auto;
-    span {
-    font-weight: bold;
-        }
-}
-.g-certification{
-    border-radius: 10px;
-    border:1px #1496cd solid ;
-    width: 80%;
-    font-family: "g-certification-serif", bold;
-    font-size: 16px;
-    color: grey;
-}
-.g-separator{
-    background-color: #1496CD; width: 70%; height: 2px;margin: 0px auto;
-}
-.g-course-container{
-    font-family: "g-certification-serif", bold;
-    border-radius: 10px;
-    border: 1px #1496CD solid;
-    width:70%;
-    margin:0.6rem auto;
-    p{
-    color: #1496CD;
-        text-transform: uppercase;
-        font-style: italic;
-        font-weight: bold;
-        font-size: 16px;
-        margin:0.6rem auto;
-    }
-}
-.g-date{
-    font-family: "g-certification-serif", normal;
-    font-size: 16px;
-    color: grey;
     margin: 0.6rem auto;
+  }
+}
+.g-date {
+  font-family: "g-certification-serif", normal;
+  font-size: 16px;
+  color: grey;
+  margin: 0.6rem auto;
 }
