@@ -5,17 +5,25 @@
     <xpath expr="//div[@id='o_survey_certification']" position="replace">
       <div
         id="o_survey_certification"
-        style="background-color:white"
+        style="background-color: white"
         t-att-class="'article certification-wrapper modern %s' % layout_color"
         t-att-data-oe-id="user_input.id"
         t-att-data-oe-model="user_input._name"
       >
         <div
           class="row"
-          style="width:295mm;height:208mm;margin:1mm;background-image: url('/certificate_gexin/static/src/img/gexin_background.jpeg');background-size: cover; background-position: center;background-repeat: no-repeat;"
+          style="
+            width: 295mm;
+            height: 208mm;
+            margin: 1mm;
+            background-image: url(&quot;/certificate_gexin/static/src/img/gexin_background.jpeg&quot;);
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+          "
         >
           <div class="col-4" />
-          <div class="col-8" style="margin: 210px 50px 0px; text-align: center; ">
+          <div class="col-8" style="margin: 210px 50px 0px; text-align: center">
             <!-- Titulo -->
             <div>
               <h1 class="g-title g-title-margin">CERTIFICADO</h1>
@@ -40,11 +48,21 @@
             <!-- Tema -->
             <div class="g-tema">
               <span>Por <t t-esc="user_input.env.company.display_name" /></span>
-              <p>Por haber completado con éxito el curso</p>
+              <p>Por haber completado con éxito el:</p>
             </div>
             <div class="g-course-container">
               <p t-field="user_input.survey_id.display_name" />
             </div>
+            <!-- Duración del curso -->
+            <t t-if="user_input.get_formatted_duration()">
+              <div class="g-duration">
+                <p>
+                  Con una duración de:
+                  <t t-esc="user_input.get_formatted_duration()" />
+                  horas académicas
+                </p>
+              </div>
+            </t>
             <div class="g-date">
               <span>Realizado el:</span>
               <!-- <div class="certification-date" t-field="user_input.create_date" t-options="{&quot;widget&quot;: &quot;date&quot;}"></div> -->
@@ -59,6 +77,14 @@
                 />
               </span>
               <!-- <div class="certification-number" t-if="user_input.scoring_success">Certificación n° <t t-esc="str(user_input.id).rjust(10, '0')"></t></div> -->
+            </div>
+            <!-- Código QR para validación -->
+            <div>
+              <p>Escanea el QR para validar este certificado:</p>
+              <img
+                style="display: block; margin: 50px"
+                t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR',user_input.get_base_url()+'/validacion/certificado?access_token='+user_input.access_token, 100, 100)"
+              />
             </div>
           </div>
         </div>
@@ -85,5 +111,36 @@
         <!-- </div> -->
       </div>
     </xpath>
+  </template>
+  <template id="certificate_validation_gexin" name="Página de validación de Certificado">
+    <t t-call="website.layout">
+      <div class="container mt-5">
+        <div class="row justify-content-center">
+          <div class="col-md-8 text-center">
+            <div class="card shadow-lg p-4">
+              <div class="card-body">
+                <h2 class="text-primary">Certificado de Autenticidad</h2>
+                <p class="mt-3">Este certificado pertenece a:</p>
+                <h3 class="fw-bold text-primary"><t t-esc="student_name" /></h3>
+                <p class="text-primary"><t t-esc="survey_name" /></p>
+
+                <div class="mt-4">
+                  <span class="badge bg-info fs-5"> 📅 Fecha de finalización: <t t-esc="completion_date" /> </span>
+                </div>
+
+                <div class="mt-3">
+                  <span class="badge bg-primary fs-5"> ✅ Certificado Válido </span>
+                </div>
+
+                <p class="mt-4 text-muted">
+                  Este documento confirma la finalización satisfactoria del curso/programa y puede ser utilizado como
+                  prueba oficial de acreditación.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </t>
   </template>
 </odoo>
