@@ -125,7 +125,10 @@
                 <p class="text-primary"><t t-esc="survey_name" /></p>
 
                 <div class="mt-4">
-                  <span class="badge bg-info fs-5"> 📅 Fecha de finalización: <t t-esc="completion_date" /> </span>
+                  <span class="badge bg-info fs-5">
+                    📅 Fecha de finalización:<br />
+                    <t t-esc="completion_date" />
+                  </span>
                 </div>
 
                 <div class="mt-3">
