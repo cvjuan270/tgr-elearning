@@ -55,7 +55,7 @@
             </div>
             <!-- Duración del curso -->
             <t t-if="user_input.get_formatted_duration()">
-              <div class="g-duration">
+              <div class="g-tema">
                 <p>
                   Con una duración de:
                   <t t-esc="user_input.get_formatted_duration()" />
@@ -80,7 +80,9 @@
             </div>
             <!-- Código QR para validación -->
             <div>
-              <p>Escanea el QR para validar este certificado:</p>
+              <div class="g-tema">
+                <p>Escanea el QR para validar este certificado:</p>
+              </div>
               <img
                 style="display: block; margin: 50px"
                 t-att-src="'/report/barcode/?barcode_type=%s&amp;value=%s&amp;width=%s&amp;height=%s'%('QR',user_input.get_base_url()+'/validacion/certificado?access_token='+user_input.access_token, 100, 100)"
@@ -126,7 +128,7 @@
 
                 <div class="mt-4">
                   <span class="badge bg-info fs-5">
-                    📅 Fecha de finalización:<br />
+                    📅 Fecha de emisión:<br />del certificado<br />
                     <t t-esc="completion_date" />
                   </span>
                 </div>
