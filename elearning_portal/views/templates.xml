@@ -1,24 +1,23 @@
 <odoo>
-    <data>
-        <!--
-        <template id="listing">
-          <ul>
-            <li t-foreach="objects" t-as="object">
-              <a t-attf-href="#{ root }/objects/#{ object.id }">
-                <t t-esc="object.display_name"/>
-              </a>
-            </li>
-          </ul>
-        </template>
-        <template id="object">
-          <h1><t t-esc="object.display_name"/></h1>
-          <dl>
-            <t t-foreach="object._fields" t-as="field">
-              <dt><t t-esc="field"/></dt>
-              <dd><t t-esc="object[field]"/></dd>
-            </t>
-          </dl>
-        </template>
--->
-    </data>
+    <!-- Oculta Tiempo de finalizacion y Miembros del web -->
+    <template id="course_sidebar" inherit_id="website_slides.course_sidebar">
+        <xpath expr="//div[@id='o_wslides_sidebar_collapse']" position="replace">
+            <div id="o_wslides_sidebar_collapse">
+                <table class="table table-sm mt-3">
+                    <tr t-if="channel.user_id">
+                        <th class="border-top-0">Responsable</th>
+                        <td class="border-top-0 text-break">
+                            <span t-esc="channel.user_id.display_name"></span>
+                        </td>
+                    </tr>
+                    <tr>
+                        <th class="border-top-0">Última actualización</th>
+                        <td class="border-top-0">
+                            <t t-esc="channel.slide_last_update" t-options="{'widget': 'date'}"></t>
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </xpath>
+    </template>
 </odoo>

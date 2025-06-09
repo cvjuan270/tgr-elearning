@@ -17,6 +17,7 @@
     "data": [
         # 'security/ir.model.access.csv',
         "views/elearning_portal_template.xml",
+        "views/templates.xml",
     ],
     "assets": {
         "web.assets.frontend": [
