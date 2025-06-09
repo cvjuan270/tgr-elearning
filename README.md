@@ -1,8 +1,8 @@
 
 <!-- /!\ Non OCA Context : Set here the badge of your runbot / runboat instance. -->
-[![Pre-commit Status](https://github.com/Juan D. Collado Vasquez/tgr-elearning/actions/workflows/pre-commit.yml/badge.svg?branch=16.0)](https://github.com/Juan D. Collado Vasquez/tgr-elearning/actions/workflows/pre-commit.yml?query=branch%3A16.0)
-[![Build Status](https://github.com/Juan D. Collado Vasquez/tgr-elearning/actions/workflows/test.yml/badge.svg?branch=16.0)](https://github.com/Juan D. Collado Vasquez/tgr-elearning/actions/workflows/test.yml?query=branch%3A16.0)
-[![codecov](https://codecov.io/gh/Juan D. Collado Vasquez/tgr-elearning/branch/16.0/graph/badge.svg)](https://codecov.io/gh/Juan D. Collado Vasquez/tgr-elearning)
+[![Pre-commit Status](https://github.com/cvjuan270/tgr-elearning/actions/workflows/pre-commit.yml/badge.svg?branch=16.0)](https://github.com/cvjuan270/tgr-elearning/actions/workflows/pre-commit.yml?query=branch%3A16.0)
+[![Build Status](https://github.com/cvjuan270/tgr-elearning/actions/workflows/test.yml/badge.svg?branch=16.0)](https://github.com/cvjuan270/tgr-elearning/actions/workflows/test.yml?query=branch%3A16.0)
+[![codecov](https://codecov.io/gh/cvjuan270/tgr-elearning/branch/16.0/graph/badge.svg)](https://codecov.io/gh/cvjuan270/tgr-elearning)
 <!-- /!\ Non OCA Context : Set here the badge of your translation instance. -->
 
 <!-- /!\ do not modify above this line -->
