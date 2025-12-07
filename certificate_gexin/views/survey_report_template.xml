@@ -16,7 +16,7 @@
             width: 295mm;
             height: 208mm;
             margin: 1mm;
-            background-image: url(&quot;/certificate_gexin/static/src/img/gexin_background.jpeg&quot;);
+            background-image: url(&quot;/certificate_gexin/static/src/img/gexin_background.jpg&quot;);
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
